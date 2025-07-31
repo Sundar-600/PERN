@@ -1,0 +1,8 @@
+.ready-tmux
+project_structure
+setup.sh
+test_schema.prisma
+Notes.md
+.env
+/node_modules
+/src/generated
