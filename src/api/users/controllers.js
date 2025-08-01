@@ -1,6 +1,7 @@
 import prisma from "../../db.js";
 
 export const createNewUser = async (req, res) => {
+	// TODO : Make it in a middleware later ?
 	if (!req.body.name) {
 		res.status(400);
 		return res.json({ error: "name field is not provided" });
@@ -12,7 +13,11 @@ export const createNewUser = async (req, res) => {
 				name: req.body.name,
 			},
 		});
-		res.status(201).json({ message : `User ${req.body.name} is successfully created` });
+
+		const safeUser = {...user,id : user.id.toString()};
+
+		res.status(201).json({ message : `User ${req.body.name} is successfully created`,data : safeUser });
+
 	} catch (err) {
 		console.log("-----------");
 		console.error(err);
@@ -38,3 +43,5 @@ export const getAllUsers = async (req,res) => {
 	}
 }
 
+
+// export const getUsers = (req,res) =>

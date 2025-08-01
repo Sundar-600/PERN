@@ -1,7 +1,6 @@
 import express from "express";
 import morgan from "morgan";
 
-import greetRoutes from "./api/greet/router.js";
 import userRoutes from "./api/users/routes.js";
 import taskRoutes from "./api/tasks/router.js";
 
@@ -20,7 +19,6 @@ app.use(express.urlencoded({"extended":true}))
 
 // This is the main entry point of API Routes
 // Here we will redirect to different Routes
-app.use("/api/greet",greetRoutes);
 app.use("/api/users",userRoutes);
 app.use("/api/tasks",taskRoutes);
 

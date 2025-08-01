@@ -6,3 +6,5 @@ Notes.md
 .env
 /node_modules
 /src/generated
+ER.txt
+design_rules.md
