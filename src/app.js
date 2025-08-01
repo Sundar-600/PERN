@@ -9,7 +9,7 @@ const app = express();
 // We will add any Middlewares before it 
 
 // Morgan gives us the logging info about the request 
-app.use(morgan("dev"));
+// app.use(morgan("dev"));
 
 // express.json automatically convert the body of the POST request to easily work with
 app.use(express.json());
