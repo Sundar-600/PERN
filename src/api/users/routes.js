@@ -1,5 +1,6 @@
  import { Router } from "express";
  import { createNewUser, getAllUsers } from "./controllers.js";
+import { getUserTasks } from "../tasks/controller.js";
 
  const router = Router();
 
@@ -10,6 +11,7 @@
  //NOT IMPLEMENTED 
  // Read by Id 
  // router.get("/:id",getSingleUser);
+ router.get("/tasks",getUserTasks);
 
  //UPDATE
  // router.put("/:id",updateUser);
