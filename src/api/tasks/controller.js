@@ -14,11 +14,6 @@ export const getTasks = async (req, res) => {
 
 export const getUserTasks = async (req, res) => {
     // Get only tasks created by a particular user
-    if (!req.body.userId) {
-        return res.status(400).json({
-            error: "userId field is required in the body"
-        })
-    }
 	try {
 		const tasks = await prisma.task.findMany({
 			where:{
@@ -52,12 +47,6 @@ export const getSingleTask = async (req, res) => {
 
 export const createTask = async (req, res) => {
 	// Create a new task associated with particular id
-    if (!req.body.name || !req.body.userId) {
-        return res.status(400).json({
-            error: "name and userId field is required in the body"
-        })
-    }
-
     try {
     	const task  = await prisma.task.create({
     		data : {
@@ -77,11 +66,6 @@ export const createTask = async (req, res) => {
 export const updateTask = async (req, res) => {
 	//Currently testing for now we only update status of the tasks
 	const id = req.params.id;
-
-	if(!req.body.status){
-		return res.status(400).json({error : "body doesn't contain status field"})
-	}
-
 	try {
 		const task = await prisma.task.update({where : { 
 			id,
