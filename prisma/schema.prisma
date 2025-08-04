@@ -20,7 +20,7 @@ model Task {
   createdAt  DateTime @default(now())
   status     STATUS   @default(IN_PROGRESS)
   userId     BigInt
-  belongsTo  User     @relation(fields: [userId], references: [id])
+  belongsTo  User     @relation(fields: [userId], references: [id],onDelete: Cascade)
 }
 
 enum STATUS {

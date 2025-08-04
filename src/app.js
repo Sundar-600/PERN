@@ -1,7 +1,6 @@
 import express from "express";
-import morgan from "morgan";
-
-import userRoutes from "./api/users/routes.js";
+//import morgan from "morgan" // For now commented for deployment
+import userRoutes from "./api/users/router.js";
 import taskRoutes from "./api/tasks/router.js";
 
 const app = express();
@@ -21,5 +20,7 @@ app.use(express.urlencoded({"extended":true}))
 // Here we will redirect to different Routes
 app.use("/api/users",userRoutes);
 app.use("/api/tasks",taskRoutes);
+
+// TODO : Later understand and put the Error Handlers here and end of every other sub routes
 
 export default app;

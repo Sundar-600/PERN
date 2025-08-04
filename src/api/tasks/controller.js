@@ -12,25 +12,25 @@ export const getTasks = async (req, res) => {
 	}
 }
 
+// Get all the tasks for the particular user
 export const getUserTasks = async (req, res) => {
-    // Get only tasks created by a particular user
 	try {
 		const tasks = await prisma.task.findMany({
 			where:{
-				userId:req.body.userId,
+				userId: req.body.userId
 			}
 		});
 		const formattedTasks  = tasks.map(task => ({...task,id: task.id.toString(),userId:task.userId.toString()}));
 		return res.status(200).json({data : formattedTasks});
 	}catch (err){
-		return res.status(404).json({error: err});
+		return res.status(404).json({err : "Something went wrong need to chec"});
 	}
 
 }
 
+//Get a particular task by it's id
 export const getSingleTask = async (req, res) => {
-	//Get a particular task
-	id = req.params.id;
+	const id = req.params.id;
 	try {
 		const task = await prisma.task.findFirst({
 			where:{
@@ -42,11 +42,10 @@ export const getSingleTask = async (req, res) => {
 	}catch (err){
 		return res.status(404).json({error: err});
 	}
-
 }
 
+// Create a new task associated with particular user id
 export const createTask = async (req, res) => {
-	// Create a new task associated with particular id
     try {
     	const task  = await prisma.task.create({
     		data : {
@@ -62,7 +61,6 @@ export const createTask = async (req, res) => {
 }
 
 // Update a Task by id
-
 export const updateTask = async (req, res) => {
 	//Currently testing for now we only update status of the tasks
 	const id = req.params.id;
@@ -79,8 +77,8 @@ export const updateTask = async (req, res) => {
 	}
 }
 
+// Delete task by id
 export const deleteTask = async (req,res) =>{
-	// Delte task by id
 	const id = req.params.id;
 	try{
 		const task = await prisma.task.delete({where:{id}});

@@ -1,5 +1,5 @@
  import { Router } from "express";
- import { createNewUser, getAllUsers } from "./controllers.js";
+ import { deleteUser,createNewUser, getAllUsers ,getSingleUser,updateUser} from "./controllers.js";
 import { getUserTasks } from "../tasks/controller.js";
 import { body } from "express-validator";
 import { validator } from "../../../middlewares/validation.js";
@@ -18,21 +18,29 @@ import { validator } from "../../../middlewares/validation.js";
  	createNewUser);
 
  //READ
+ //All users and search filtered users by name
  router.get("/",getAllUsers);
- //NOT IMPLEMENTED 
 
- // Read by Id 
- // router.get("/:id",getSingleUser);
-
+ // Note : Put the named routes first or else it picks the dynamic routes
  router.get("/tasks",
  	body("userId").exists().isInt(),
  	validator,
  	getUserTasks);
 
+ // Read by Id 
+ router.get("/:id",getSingleUser);
+
+
  //UPDATE
- // router.put("/:id",updateUser);
- // router.patch("/:id",updateUser); // Update Partially ??
+ router.put("/:id",
+ 	body("name")
+ 	.exists()
+ 	.isString(),
+ 	validator,
+ 	updateUser);
 
  //DELETE
- // router.delete("/:id",deleteUser);
+ router.delete("/:id",deleteUser);
+
+
  export default router;
